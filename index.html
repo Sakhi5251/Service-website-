@@ -1,340 +1,467 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EquipLink Africa | Equipment Sourcing</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<title>EquipLink Africa | Equipment Sourcing</title>
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f7f5;
-            color: #222;
-            line-height: 1.6;
-        }
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        header {
-            background: #0b3d2e;
-            color: white;
-            padding: 25px 20px;
-            text-align: center;
-        }
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #222;
+    line-height: 1.6;
+}
 
-        header h1 {
-            font-size: 34px;
-            margin-bottom: 8px;
-        }
+header {
+    background: #123d2a;
+    color: white;
+    padding: 25px 20px;
+    text-align: center;
+}
 
-        header p {
-            font-size: 17px;
-        }
+header h1 {
+    font-size: 32px;
+    margin-bottom: 5px;
+}
 
-        nav {
-            background: #06291f;
-            text-align: center;
-            padding: 12px;
-        }
+header p {
+    font-size: 16px;
+}
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 12px;
-            font-weight: bold;
-        }
+nav {
+    background: #0c2b1e;
+    text-align: center;
+    padding: 12px;
+}
 
-        .hero {
-            padding: 70px 20px;
-            text-align: center;
-            background: white;
-        }
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    font-weight: bold;
+}
 
-        .hero h2 {
-            font-size: 38px;
-            color: #0b3d2e;
-            margin-bottom: 15px;
-        }
+.hero {
+    background: linear-gradient(rgba(18,61,42,0.85), rgba(18,61,42,0.85)),
+    url("https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1600&q=80");
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 80px 20px;
+    text-align: center;
+}
 
-        .hero p {
-            max-width: 750px;
-            margin: auto;
-            font-size: 19px;
-        }
+.hero h2 {
+    font-size: 38px;
+    margin-bottom: 15px;
+}
 
-        .button {
-            display: inline-block;
-            margin-top: 25px;
-            padding: 14px 25px;
-            background: #0b3d2e;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: bold;
-        }
+.hero p {
+    max-width: 700px;
+    margin: auto;
+    font-size: 18px;
+}
 
-        .button:hover {
-            background: #145c45;
-        }
+.button {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 14px 25px;
+    background: #f4b400;
+    color: #111;
+    text-decoration: none;
+    border-radius: 7px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
 
-        section {
-            padding: 50px 20px;
-            max-width: 1100px;
-            margin: auto;
-        }
+section {
+    padding: 50px 20px;
+    max-width: 1100px;
+    margin: auto;
+}
 
-        section h2 {
-            text-align: center;
-            color: #0b3d2e;
-            margin-bottom: 30px;
-            font-size: 30px;
-        }
+section h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #123d2a;
+}
 
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-            gap: 20px;
-        }
+.services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+}
 
-        .card {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-        }
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
 
-        .card h3 {
-            color: #0b3d2e;
-            margin-bottom: 10px;
-        }
+.card h3 {
+    color: #123d2a;
+    margin-bottom: 10px;
+}
 
-        .process {
-            background: #e9f1ed;
-            max-width: none;
-        }
+.form-container {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+    max-width: 750px;
+    margin: auto;
+}
 
-        .process-content {
-            max-width: 1100px;
-            margin: auto;
-        }
+.form-group {
+    margin-bottom: 18px;
+}
 
-        .contact {
-            background: #0b3d2e;
-            color: white;
-            text-align: center;
-            max-width: none;
-        }
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
 
-        .contact h2 {
-            color: white;
-        }
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+}
 
-        .contact a {
-            color: white;
-            font-weight: bold;
-            text-decoration: none;
-        }
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
 
-        footer {
-            background: #06291f;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            font-size: 14px;
-        }
+.submit-button {
+    width: 100%;
+    padding: 15px;
+    background: #123d2a;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
 
-        @media (max-width: 600px) {
-            header h1 {
-                font-size: 28px;
-            }
+.submit-button:hover {
+    background: #1d6143;
+}
 
-            .hero h2 {
-                font-size: 30px;
-            }
+.contact {
+    text-align: center;
+    background: #123d2a;
+    color: white;
+    max-width: none;
+}
 
-            nav a {
-                display: inline-block;
-                margin: 5px 8px;
-            }
-        }
-    </style>
+.contact h2 {
+    color: white;
+}
+
+.contact a {
+    color: #f4b400;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.contact-item {
+    margin: 12px 0;
+    font-size: 17px;
+}
+
+footer {
+    background: #0c2b1e;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+}
+
+@media(max-width:600px) {
+    .hero h2 {
+        font-size: 29px;
+    }
+
+    header h1 {
+        font-size: 27px;
+    }
+}
+</style>
 </head>
 
 <body>
 
 <header>
     <h1>EquipLink Africa</h1>
-    <p>Connecting Businesses With the Equipment They Need</p>
+    <p>Connecting Businesses With The Equipment They Need</p>
 </header>
 
 <nav>
     <a href="#home">Home</a>
     <a href="#services">Services</a>
-    <a href="#how">How It Works</a>
+    <a href="#request">Request Equipment</a>
     <a href="#contact">Contact</a>
 </nav>
 
 <section class="hero" id="home">
-    <h2>Need Expensive Equipment?</h2>
-
+    <h2>Need Equipment?</h2>
     <p>
-        EquipLink Africa helps businesses find, source and connect with
-        equipment owners and suppliers across South Africa and Africa.
-        From construction machinery to specialised equipment, we help you
-        find the right solution without having to purchase the equipment yourself.
+        We help businesses and individuals source machinery,
+        construction equipment, agricultural equipment,
+        transport equipment and specialised machinery.
     </p>
 
-    <a class="button"
-       href="https://wa.me/27791040241?text=Hello%20EquipLink%20Africa%2C%20I%20would%20like%20help%20sourcing%20equipment."
-       target="_blank">
-        Request Equipment on WhatsApp
-    </a>
+    <a href="#request" class="button">Request Equipment</a>
 </section>
 
 <section id="services">
+
     <h2>What We Can Source</h2>
 
-    <div class="cards">
+    <div class="services">
 
         <div class="card">
-            <h3>Construction Equipment</h3>
+            <h3>🚜 Construction Equipment</h3>
             <p>
-                Excavators, bulldozers, graders, loaders, cranes,
-                rollers and other heavy machinery.
+                Excavators, graders, bulldozers, loaders,
+                cranes and other construction machinery.
             </p>
         </div>
 
         <div class="card">
-            <h3>Mining Equipment</h3>
+            <h3>🚛 Transport Equipment</h3>
             <p>
-                Mining machinery, specialised equipment and
-                supporting equipment for mining operations.
+                Trucks, trailers, specialised vehicles
+                and heavy transport equipment.
             </p>
         </div>
 
         <div class="card">
-            <h3>Transport Equipment</h3>
+            <h3>🌾 Agricultural Equipment</h3>
             <p>
-                Trucks, trailers, specialised transport equipment
-                and heavy-duty vehicles.
+                Tractors, harvesters, irrigation equipment
+                and agricultural machinery.
             </p>
         </div>
 
         <div class="card">
-            <h3>Specialised Equipment</h3>
+            <h3>🏗️ Specialised Equipment</h3>
             <p>
-                Need something unusual or expensive?
-                Tell us what you need and we will help locate it.
+                Mining equipment, generators, lifting equipment
+                and other specialised machinery.
             </p>
         </div>
 
         <div class="card">
-            <h3>Agricultural Equipment</h3>
+            <h3>🚁 Large Equipment</h3>
             <p>
-                Tractors, harvesting machinery, irrigation equipment
-                and other agricultural machinery.
+                We can assist with sourcing high-value
+                specialised equipment based on your requirements.
             </p>
         </div>
 
         <div class="card">
-            <h3>Special Projects</h3>
+            <h3>🔎 Equipment Sourcing</h3>
             <p>
-                Large or specialised equipment requirements can be
-                sourced through our supplier network.
+                Tell us what you need and we will help
+                identify potential suppliers and options.
             </p>
         </div>
 
     </div>
+
 </section>
 
-<section class="process" id="how">
-    <div class="process-content">
-
-        <h2>How EquipLink Africa Works</h2>
-
-        <div class="cards">
-
-            <div class="card">
-                <h3>1. Tell Us What You Need</h3>
-                <p>
-                    Send us the equipment you need, where you need it,
-                    and how long you need it for.
-                </p>
-            </div>
-
-            <div class="card">
-                <h3>2. We Search</h3>
-                <p>
-                    We identify suitable equipment owners, suppliers
-                    and rental opportunities.
-                </p>
-            </div>
-
-            <div class="card">
-                <h3>3. We Connect You</h3>
-                <p>
-                    We connect you with potential suppliers so you can
-                    discuss availability and pricing.
-                </p>
-            </div>
-
-            <div class="card">
-                <h3>4. Get Your Equipment</h3>
-                <p>
-                    Once the terms are agreed, the supplier provides
-                    the equipment according to your arrangement.
-                </p>
-            </div>
-
-        </div>
-
-    </div>
-</section>
-
-<section id="contact" class="contact">
+<section id="request">
 
     <h2>Request Equipment</h2>
 
-    <p>
-        Tell us what equipment you are looking for and we will help
-        you find a suitable supplier.
-    </p>
+    <div class="form-container">
 
-    <p style="margin-top:20px;">
-        <strong>WhatsApp:</strong>
+        <p style="text-align:center; margin-bottom:25px;">
+            Tell us what equipment you need and we will contact you
+            to discuss your requirements.
+        </p>
+
+        <form onsubmit="sendRequest(event)">
+
+            <div class="form-group">
+                <label for="name">Full Name *</label>
+                <input type="text" id="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="company">Company / Business Name</label>
+                <input type="text" id="company">
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone / WhatsApp Number *</label>
+                <input type="tel" id="phone" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email">
+            </div>
+
+            <div class="form-group">
+                <label for="equipment">Type of Equipment *</label>
+
+                <select id="equipment" required>
+
+                    <option value="">Select equipment type</option>
+
+                    <option>Excavator</option>
+                    <option>Bulldozer</option>
+                    <option>Wheel Loader</option>
+                    <option>Grader</option>
+                    <option>Crane</option>
+                    <option>Dump Truck</option>
+                    <option>Tractor</option>
+                    <option>Harvester</option>
+                    <option>Generator</option>
+                    <option>Mining Equipment</option>
+                    <option>Trailer</option>
+                    <option>Specialised Equipment</option>
+                    <option>Other</option>
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+                <label for="condition">Equipment Condition</label>
+
+                <select id="condition">
+
+                    <option>New</option>
+                    <option>Used</option>
+                    <option>Either New or Used</option>
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+                <label for="quantity">Quantity Required</label>
+                <input type="number" id="quantity" min="1" value="1">
+            </div>
+
+            <div class="form-group">
+                <label for="location">Delivery / Operating Location</label>
+                <input type="text" id="location"
+                       placeholder="e.g. Thabazimbi, Limpopo">
+            </div>
+
+            <div class="form-group">
+                <label for="budget">Estimated Budget</label>
+                <input type="text" id="budget"
+                       placeholder="e.g. R500,000">
+            </div>
+
+            <div class="form-group">
+                <label for="details">Additional Requirements</label>
+
+                <textarea id="details"
+                    placeholder="Describe the equipment you need, specifications, preferred brand, capacity, etc."></textarea>
+
+            </div>
+
+            <button type="submit" class="submit-button">
+                Send Equipment Request
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+<section class="contact" id="contact">
+
+    <h2>Contact EquipLink Africa</h2>
+
+    <div class="contact-item">
+        📱 WhatsApp:
         <a href="https://wa.me/27791040241" target="_blank">
             +27 79 104 0241
         </a>
-    </p>
+    </div>
 
-    <p>
-        <strong>Alternative Contact:</strong>
-        +27 78 638 5251
-    </p>
+    <div class="contact-item">
+        ☎️ Phone:
+        <a href="tel:+27786385251">
+            +27 78 638 5251
+        </a>
+    </div>
 
-    <p>
-        <strong>Email:</strong>
+    <div class="contact-item">
+        📧 Email:
         <a href="mailto:Shadreckthemba7@gmail.com">
             Shadreckthemba7@gmail.com
         </a>
-    </p>
-
-    <a class="button"
-       href="https://wa.me/27791040241?text=Hello%20EquipLink%20Africa%2C%20I%20need%20help%20finding%20equipment."
-       target="_blank">
-        Chat With Us on WhatsApp
-    </a>
+    </div>
 
 </section>
 
 <footer>
     <p>© 2026 EquipLink Africa. All Rights Reserved.</p>
-    <p>Equipment Sourcing & Connection Services</p>
 </footer>
 
+<script>
+
+function sendRequest(event) {
+
+    event.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const company = document.getElementById("company").value;
+    const phone = document.getElementById("phone").value;
+    const email = document.getElementById("email").value;
+    const equipment = document.getElementById("equipment").value;
+    const condition = document.getElementById("condition").value;
+    const quantity = document.getElementById("quantity").value;
+    const location = document.getElementById("location").value;
+    const budget = document.getElementById("budget").value;
+    const details = document.getElementById("details").value;
+
+    const message =
+        "EQUIPMENT REQUEST - EQUIPLINK AFRICA%0A%0A" +
+        "Name: " + encodeURIComponent(name) + "%0A" +
+        "Company: " + encodeURIComponent(company) + "%0A" +
+        "Phone/WhatsApp: " + encodeURIComponent(phone) + "%0A" +
+        "Email: " + encodeURIComponent(email) + "%0A" +
+        "Equipment: " + encodeURIComponent(equipment) + "%0A" +
+        "Condition: " + encodeURIComponent(condition) + "%0A" +
+        "Quantity: " + encodeURIComponent(quantity) + "%0A" +
+        "Location: " + encodeURIComponent(location) + "%0A" +
+        "Budget: " + encodeURIComponent(budget) + "%0A" +
+        "Additional Requirements: " + encodeURIComponent(details);
+
+    const whatsappURL =
+        "https://wa.me/27791040241?text=" + message;
+
+    window.open(whatsappURL, "_blank");
+}
+
+</script>
+
 </body>
-</html>
+    </html>
