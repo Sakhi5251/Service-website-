@@ -1,109 +1,340 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EquipLink Africa</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,Helvetica,sans-serif;color:#172018;background:#f7f8f5;line-height:1.5}
-header{background:#173b25;color:white;padding:18px 7%;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:5}
-.logo{font-size:24px;font-weight:800}.logo span{color:#b8d86b}
-nav a{color:white;text-decoration:none;margin-left:24px;font-weight:600}
-.hero{padding:80px 7%;background:linear-gradient(135deg,#173b25,#2e633c);color:white}
-.hero h1{font-size:clamp(40px,6vw,68px);max-width:800px;line-height:1.05;margin-bottom:20px}
-.hero p{font-size:20px;max-width:680px;color:#e6efe7;margin-bottom:30px}
-.btn{display:inline-block;background:#c8e36d;color:#173b25;padding:14px 22px;border-radius:9px;text-decoration:none;font-weight:800;border:0;cursor:pointer}
-section{padding:65px 7%}.section-title{text-align:center;margin-bottom:35px}
-.section-title h2{font-size:36px}.section-title p{color:#667066}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px}
-.card{background:white;padding:28px;border-radius:15px;box-shadow:0 5px 20px #0000000d;border:1px solid #e5e9e3}
-.icon{font-size:34px;margin-bottom:14px}.card h3{margin-bottom:8px}
-.steps{background:#edf2eb}.step{position:relative}.num{font-size:13px;font-weight:900;color:#64813d;margin-bottom:8px}
-.form-wrap{max-width:850px;margin:auto;background:white;padding:32px;border-radius:18px;box-shadow:0 5px 25px #0000000d}
-form{display:grid;gap:15px}label{font-weight:700;font-size:14px}
-input,textarea,select{width:100%;padding:13px;border:1px solid #ccd4ca;border-radius:8px;font-size:16px;margin-top:6px}
-textarea{min-height:110px;resize:vertical}.success{display:none;background:#e8f5d8;padding:15px;border-radius:8px;color:#31511e}
-footer{background:#173b25;color:white;text-align:center;padding:30px 7%}
-@media(max-width:650px){nav{display:none}.hero{padding-top:55px}section{padding:48px 5%}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EquipLink Africa | Equipment Sourcing</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7f5;
+            color: #222;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0b3d2e;
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 34px;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            font-size: 17px;
+        }
+
+        nav {
+            background: #06291f;
+            text-align: center;
+            padding: 12px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 12px;
+            font-weight: bold;
+        }
+
+        .hero {
+            padding: 70px 20px;
+            text-align: center;
+            background: white;
+        }
+
+        .hero h2 {
+            font-size: 38px;
+            color: #0b3d2e;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            max-width: 750px;
+            margin: auto;
+            font-size: 19px;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 14px 25px;
+            background: #0b3d2e;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        .button:hover {
+            background: #145c45;
+        }
+
+        section {
+            padding: 50px 20px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        section h2 {
+            text-align: center;
+            color: #0b3d2e;
+            margin-bottom: 30px;
+            font-size: 30px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        .card h3 {
+            color: #0b3d2e;
+            margin-bottom: 10px;
+        }
+
+        .process {
+            background: #e9f1ed;
+            max-width: none;
+        }
+
+        .process-content {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .contact {
+            background: #0b3d2e;
+            color: white;
+            text-align: center;
+            max-width: none;
+        }
+
+        .contact h2 {
+            color: white;
+        }
+
+        .contact a {
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        footer {
+            background: #06291f;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 28px;
+            }
+
+            .hero h2 {
+                font-size: 30px;
+            }
+
+            nav a {
+                display: inline-block;
+                margin: 5px 8px;
+            }
+        }
+    </style>
 </head>
+
 <body>
+
 <header>
-  <div class="logo">EquipLink <span>Africa</span></div>
-  <nav><a href="#equipment">Equipment</a><a href="#how">How It Works</a><a href="#request">Request</a></nav>
+    <h1>EquipLink Africa</h1>
+    <p>Connecting Businesses With the Equipment They Need</p>
 </header>
 
-<main>
-<section class="hero">
-  <h1>Need equipment?<br>We'll find it.</h1>
-  <p>Tell us what equipment you need. EquipLink Africa helps customers find suitable construction, mining, agricultural and specialised equipment from suppliers.</p>
-  <a class="btn" href="#request">Request Equipment</a>
+<nav>
+    <a href="#home">Home</a>
+    <a href="#services">Services</a>
+    <a href="#how">How It Works</a>
+    <a href="#contact">Contact</a>
+</nav>
+
+<section class="hero" id="home">
+    <h2>Need Expensive Equipment?</h2>
+
+    <p>
+        EquipLink Africa helps businesses find, source and connect with
+        equipment owners and suppliers across South Africa and Africa.
+        From construction machinery to specialised equipment, we help you
+        find the right solution without having to purchase the equipment yourself.
+    </p>
+
+    <a class="button"
+       href="https://wa.me/27791040241?text=Hello%20EquipLink%20Africa%2C%20I%20would%20like%20help%20sourcing%20equipment."
+       target="_blank">
+        Request Equipment on WhatsApp
+    </a>
 </section>
 
-<section id="equipment">
-  <div class="section-title"><h2>Equipment We Source</h2><p>From short-term rentals to specialised equipment.</p></div>
-  <div class="grid">
-    <div class="card"><div class="icon">🏗️</div><h3>Construction</h3><p>Excavators, loaders, graders, cranes and other machinery.</p></div>
-    <div class="card"><div class="icon">⛏️</div><h3>Mining</h3><p>Specialised mining and heavy-duty equipment.</p></div>
-    <div class="card"><div class="icon">🚜</div><h3>Agriculture</h3><p>Tractors, implements and agricultural machinery.</p></div>
-    <div class="card"><div class="icon">🚁</div><h3>Specialised</h3><p>Helicopters, access equipment and other specialised assets.</p></div>
-  </div>
+<section id="services">
+    <h2>What We Can Source</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Construction Equipment</h3>
+            <p>
+                Excavators, bulldozers, graders, loaders, cranes,
+                rollers and other heavy machinery.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Mining Equipment</h3>
+            <p>
+                Mining machinery, specialised equipment and
+                supporting equipment for mining operations.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Transport Equipment</h3>
+            <p>
+                Trucks, trailers, specialised transport equipment
+                and heavy-duty vehicles.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Specialised Equipment</h3>
+            <p>
+                Need something unusual or expensive?
+                Tell us what you need and we will help locate it.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Agricultural Equipment</h3>
+            <p>
+                Tractors, harvesting machinery, irrigation equipment
+                and other agricultural machinery.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Special Projects</h3>
+            <p>
+                Large or specialised equipment requirements can be
+                sourced through our supplier network.
+            </p>
+        </div>
+
+    </div>
 </section>
 
-<section id="how" class="steps">
-  <div class="section-title"><h2>How It Works</h2><p>A simple way to find equipment without buying it.</p></div>
-  <div class="grid">
-    <div class="card step"><div class="num">01</div><h3>Tell us what you need</h3><p>Submit your equipment requirements, location and dates.</p></div>
-    <div class="card step"><div class="num">02</div><h3>We source options</h3><p>We look for suitable supplier and equipment options.</p></div>
-    <div class="card step"><div class="num">03</div><h3>Choose your option</h3><p>Compare available options and arrange the rental or service directly.</p></div>
-  </div>
+<section class="process" id="how">
+    <div class="process-content">
+
+        <h2>How EquipLink Africa Works</h2>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>1. Tell Us What You Need</h3>
+                <p>
+                    Send us the equipment you need, where you need it,
+                    and how long you need it for.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>2. We Search</h3>
+                <p>
+                    We identify suitable equipment owners, suppliers
+                    and rental opportunities.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>3. We Connect You</h3>
+                <p>
+                    We connect you with potential suppliers so you can
+                    discuss availability and pricing.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>4. Get Your Equipment</h3>
+                <p>
+                    Once the terms are agreed, the supplier provides
+                    the equipment according to your arrangement.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
 </section>
 
-<section id="request">
-  <div class="section-title"><h2>Request Equipment</h2><p>Send us your requirements and we'll get back to you.</p></div>
-  <div class="form-wrap">
-    <div class="success" id="success">Your request has been captured for this prototype.</div>
-    <form onsubmit="submitRequest(event)">
-      <label>Name<input required placeholder="Your name"></label>
-      <label>WhatsApp / Phone<input required placeholder="+27 ..."></label>
-      <label>Equipment needed<input required placeholder="e.g. Excavator"></label>
-      <label>Location<input required placeholder="Town / Province"></label>
-      <label>Rental period<input placeholder="e.g. 7 days"></label>
-      <label>Additional details<textarea placeholder="Tell us anything important..."></textarea></label>
-      <button class="btn" type="submit">Send Request</button>
-    </form>
-  </div>
+<section id="contact" class="contact">
+
+    <h2>Request Equipment</h2>
+
+    <p>
+        Tell us what equipment you are looking for and we will help
+        you find a suitable supplier.
+    </p>
+
+    <p style="margin-top:20px;">
+        <strong>WhatsApp:</strong>
+        <a href="https://wa.me/27791040241" target="_blank">
+            +27 79 104 0241
+        </a>
+    </p>
+
+    <p>
+        <strong>Alternative Contact:</strong>
+        +27 78 638 5251
+    </p>
+
+    <p>
+        <strong>Email:</strong>
+        <a href="mailto:Shadreckthemba7@gmail.com">
+            Shadreckthemba7@gmail.com
+        </a>
+    </p>
+
+    <a class="button"
+       href="https://wa.me/27791040241?text=Hello%20EquipLink%20Africa%2C%20I%20need%20help%20finding%20equipment."
+       target="_blank">
+        Chat With Us on WhatsApp
+    </a>
+
 </section>
 
-<section>
-  <div class="section-title"><h2>List Your Equipment</h2><p>Are you an equipment owner or supplier? Let customers discover your equipment.</p></div>
-  <div class="form-wrap">
-    <form onsubmit="submitSupplier(event)">
-      <label>Name / Company<input required placeholder="Company name"></label>
-      <label>Phone / WhatsApp<input required placeholder="+27 ..."></label>
-      <label>Equipment<input required placeholder="e.g. 20-ton excavator"></label>
-      <label>Location<input required placeholder="Where is the equipment?"></label>
-      <label>Details<textarea placeholder="Availability, rates, specifications..."></textarea></label>
-      <button class="btn" type="submit">List Equipment</button>
-    </form>
-  </div>
-</section>
-</main>
+<footer>
+    <p>© 2026 EquipLink Africa. All Rights Reserved.</p>
+    <p>Equipment Sourcing & Connection Services</p>
+</footer>
 
-<footer><strong>EquipLink Africa</strong><br>Need equipment? We'll find it.</footer>
-
-<script>
-function submitRequest(e){
- e.preventDefault();
- document.getElementById('success').style.display='block';
- e.target.reset();
-}
-function submitSupplier(e){
- e.preventDefault();
- alert('Supplier listing captured for this prototype.');
- e.target.reset();
-}
-</script>
 </body>
 </html>
