@@ -4,132 +4,292 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>EquipLink Africa | Equipment Sourcing</title>
+<title>EquipLink Africa | Equipment Marketplace</title>
 
 <style>
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background: #f4f7f5;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f7f6;
     color: #222;
     line-height: 1.6;
 }
 
+/* HEADER */
 header {
-    background: #123d2a;
+    background: #123b25;
     color: white;
-    padding: 25px 20px;
-    text-align: center;
+    padding: 18px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-header h1 {
-    font-size: 32px;
-    margin-bottom: 5px;
+.logo {
+    font-size: 26px;
+    font-weight: bold;
 }
 
-header p {
-    font-size: 16px;
-}
-
-nav {
-    background: #0c2b1e;
-    text-align: center;
-    padding: 12px;
+.logo span {
+    color: #f2b705;
 }
 
 nav a {
     color: white;
     text-decoration: none;
-    margin: 0 10px;
+    margin-left: 20px;
     font-weight: bold;
 }
 
-.hero {
-    background: linear-gradient(rgba(18,61,42,0.85), rgba(18,61,42,0.85)),
-    url("https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1600&q=80");
-    background-size: cover;
-    background-position: center;
-    color: white;
-    padding: 80px 20px;
-    text-align: center;
+nav a:hover {
+    color: #f2b705;
 }
 
-.hero h2 {
-    font-size: 38px;
+/* HERO */
+.hero {
+    min-height: 620px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 60px 20px;
+
+    background:
+    linear-gradient(rgba(0,0,0,.62), rgba(0,0,0,.62)),
+    url("https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1600&q=80");
+
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-content {
+    max-width: 850px;
+}
+
+.hero h1 {
+    font-size: 52px;
     margin-bottom: 15px;
 }
 
-.hero p {
-    max-width: 700px;
-    margin: auto;
-    font-size: 18px;
+.hero h1 span {
+    color: #f2b705;
 }
 
-.button {
+.hero h2 {
+    font-size: 27px;
+    margin-bottom: 18px;
+}
+
+.hero p {
+    font-size: 19px;
+    margin-bottom: 30px;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.btn {
     display: inline-block;
-    margin-top: 25px;
-    padding: 14px 25px;
-    background: #f4b400;
-    color: #111;
+    padding: 14px 24px;
+    border-radius: 6px;
     text-decoration: none;
-    border-radius: 7px;
     font-weight: bold;
     border: none;
     cursor: pointer;
 }
 
+.primary {
+    background: #f2b705;
+    color: #111;
+}
+
+.secondary {
+    background: #1e8f4d;
+    color: white;
+}
+
+.dark {
+    background: #123b25;
+    color: white;
+}
+
+/* SECTIONS */
 section {
-    padding: 50px 20px;
-    max-width: 1100px;
-    margin: auto;
+    padding: 70px 6%;
 }
 
-section h2 {
+.section-title {
     text-align: center;
-    margin-bottom: 30px;
-    color: #123d2a;
+    margin-bottom: 40px;
 }
 
-.services {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 20px;
-}
-
-.card {
-    background: white;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-}
-
-.card h3 {
-    color: #123d2a;
+.section-title h2 {
+    color: #123b25;
+    font-size: 34px;
     margin-bottom: 10px;
 }
 
-.form-container {
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+.section-title p {
     max-width: 750px;
     margin: auto;
+    color: #555;
+}
+
+/* MARKETPLACE */
+.marketplace {
+    background: white;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 22px;
+}
+
+.card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 28px;
+    box-shadow: 0 3px 15px rgba(0,0,0,.09);
+    border-top: 4px solid #123b25;
+}
+
+.card h3 {
+    color: #123b25;
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #555;
+}
+
+/* CATEGORIES */
+.categories {
+    background: #f1f4f2;
+}
+
+.category {
+    text-align: center;
+    padding: 25px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0,0,0,.07);
+}
+
+.category .icon {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+/* HOW IT WORKS */
+.steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+.step {
+    text-align: center;
+    padding: 25px;
+}
+
+.step-number {
+    width: 55px;
+    height: 55px;
+    background: #123b25;
+    color: white;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* TWO SIDES */
+.two-sided {
+    background: #123b25;
+    color: white;
+}
+
+.two-sided .section-title h2 {
+    color: white;
+}
+
+.two-sided .section-title p {
+    color: #ddd;
+}
+
+.side-card {
+    background: white;
+    color: #222;
+    padding: 35px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.side-card h3 {
+    color: #123b25;
+    font-size: 25px;
+    margin-bottom: 12px;
+}
+
+.side-card ul {
+    list-style: none;
+    margin: 20px 0;
+}
+
+.side-card li {
+    margin: 8px 0;
+}
+
+/* FORMS */
+.form-area {
+    max-width: 900px;
+    margin: auto;
+    background: white;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 4px 18px rgba(0,0,0,.1);
+}
+
+.form-area h3 {
+    color: #123b25;
+    font-size: 25px;
+    margin-bottom: 8px;
+}
+
+.form-area > p {
+    margin-bottom: 25px;
+    color: #666;
 }
 
 .form-group {
-    margin-bottom: 18px;
+    margin-bottom: 17px;
 }
 
 label {
     display: block;
     font-weight: bold;
-    margin-bottom: 7px;
+    margin-bottom: 6px;
 }
 
 input,
@@ -140,6 +300,7 @@ textarea {
     border: 1px solid #ccc;
     border-radius: 6px;
     font-size: 15px;
+    font-family: inherit;
 }
 
 textarea {
@@ -147,246 +308,677 @@ textarea {
     resize: vertical;
 }
 
-.submit-button {
+.submit {
     width: 100%;
     padding: 15px;
-    background: #123d2a;
+    background: #123b25;
     color: white;
     border: none;
-    border-radius: 7px;
-    font-size: 17px;
+    border-radius: 6px;
+    font-size: 16px;
     font-weight: bold;
     cursor: pointer;
 }
 
-.submit-button:hover {
-    background: #1d6143;
+.submit:hover {
+    background: #1e6039;
 }
 
+.success {
+    display: none;
+    margin-top: 15px;
+    padding: 14px;
+    border-radius: 6px;
+    background: #dff4e5;
+    color: #17652c;
+}
+
+/* REQUEST SECTION */
+.request-section {
+    background: #eef3ef;
+}
+
+/* OPPORTUNITIES */
+.opportunities {
+    background: white;
+}
+
+/* CONTACT */
 .contact {
-    text-align: center;
-    background: #123d2a;
+    background: #123b25;
     color: white;
-    max-width: none;
+    text-align: center;
 }
 
 .contact h2 {
-    color: white;
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.contact p {
+    margin: 10px;
 }
 
 .contact a {
-    color: #f4b400;
+    color: #f2b705;
     text-decoration: none;
     font-weight: bold;
 }
 
-.contact-item {
-    margin: 12px 0;
-    font-size: 17px;
-}
-
+/* FOOTER */
 footer {
-    background: #0c2b1e;
+    background: #0b2919;
     color: white;
     text-align: center;
-    padding: 20px;
-    font-size: 14px;
+    padding: 25px;
 }
 
-@media(max-width:600px) {
-    .hero h2 {
-        font-size: 29px;
+footer p {
+    margin: 5px;
+}
+
+/* MOBILE */
+@media (max-width: 700px) {
+
+    header {
+        flex-direction: column;
+        gap: 12px;
     }
 
-    header h1 {
-        font-size: 27px;
+    nav {
+        text-align: center;
+    }
+
+    nav a {
+        margin: 5px;
+        display: inline-block;
+        font-size: 14px;
+    }
+
+    .hero h1 {
+        font-size: 36px;
+    }
+
+    .hero h2 {
+        font-size: 22px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    section {
+        padding: 50px 5%;
+    }
+
+    .form-area {
+        padding: 22px;
     }
 }
 </style>
 </head>
 
+
 <body>
 
+<!-- HEADER -->
+
 <header>
-    <h1>EquipLink Africa</h1>
-    <p>Connecting Businesses With The Equipment They Need</p>
+
+    <div class="logo">
+        EquipLink <span>Africa</span>
+    </div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#equipment">Equipment</a>
+        <a href="#owners">Owners</a>
+        <a href="#borrowers">Borrowers</a>
+        <a href="#how">How It Works</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
 </header>
 
-<nav>
-    <a href="#home">Home</a>
-    <a href="#services">Services</a>
-    <a href="#request">Request Equipment</a>
-    <a href="#contact">Contact</a>
-</nav>
+
+<!-- HOME -->
 
 <section class="hero" id="home">
-    <h2>Need Equipment?</h2>
-    <p>
-        We help businesses and individuals source machinery,
-        construction equipment, agricultural equipment,
-        transport equipment and specialised machinery.
-    </p>
 
-    <a href="#request" class="button">Request Equipment</a>
-</section>
+    <div class="hero-content">
 
-<section id="services">
+        <h1>
+            EquipLink <span>Africa</span>
+        </h1>
 
-    <h2>What We Can Source</h2>
+        <h2>
+            Connecting Equipment With Opportunity
+        </h2>
 
-    <div class="services">
+        <p>
+            Need equipment? We'll help you find it.
+            Have equipment? Advertise it and connect with businesses
+            that need machinery.
+        </p>
 
-        <div class="card">
-            <h3>🚜 Construction Equipment</h3>
-            <p>
-                Excavators, graders, bulldozers, loaders,
-                cranes and other construction machinery.
-            </p>
-        </div>
+        <div class="hero-buttons">
 
-        <div class="card">
-            <h3>🚛 Transport Equipment</h3>
-            <p>
-                Trucks, trailers, specialised vehicles
-                and heavy transport equipment.
-            </p>
-        </div>
+            <a href="#equipment" class="btn primary">
+                🔎 Find Equipment
+            </a>
 
-        <div class="card">
-            <h3>🌾 Agricultural Equipment</h3>
-            <p>
-                Tractors, harvesters, irrigation equipment
-                and agricultural machinery.
-            </p>
-        </div>
+            <a href="#owners" class="btn secondary">
+                🏗️ Advertise Equipment
+            </a>
 
-        <div class="card">
-            <h3>🏗️ Specialised Equipment</h3>
-            <p>
-                Mining equipment, generators, lifting equipment
-                and other specialised machinery.
-            </p>
-        </div>
+            <a href="#borrowers" class="btn dark">
+                📋 Post Equipment Requirement
+            </a>
 
-        <div class="card">
-            <h3>🚁 Large Equipment</h3>
-            <p>
-                We can assist with sourcing high-value
-                specialised equipment based on your requirements.
-            </p>
-        </div>
-
-        <div class="card">
-            <h3>🔎 Equipment Sourcing</h3>
-            <p>
-                Tell us what you need and we will help
-                identify potential suppliers and options.
-            </p>
         </div>
 
     </div>
 
 </section>
 
-<section id="request">
 
-    <h2>Request Equipment</h2>
+<!-- MARKETPLACE INTRODUCTION -->
 
-    <div class="form-container">
+<section class="marketplace" id="equipment">
 
-        <p style="text-align:center; margin-bottom:25px;">
-            Tell us what equipment you need and we will contact you
-            to discuss your requirements.
+    <div class="section-title">
+
+        <h2>Equipment Marketplace</h2>
+
+        <p>
+            EquipLink Africa connects equipment owners,
+            contractors, businesses, farmers, mines and project
+            operators with the machinery they need.
         </p>
 
-        <form onsubmit="sendRequest(event)">
+    </div>
+
+
+    <div class="cards">
+
+        <div class="card">
+
+            <h3>🏗️ Construction Equipment</h3>
+
+            <p>
+                Excavators, TLBs, graders, bulldozers, loaders,
+                rollers, cranes, trucks and other construction
+                machinery.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>⛏️ Mining Equipment</h3>
+
+            <p>
+                Machinery and support equipment used for mining,
+                earthmoving, material handling and related projects.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>🌾 Agricultural Equipment</h3>
+
+            <p>
+                Tractors, implements, water equipment, loaders
+                and machinery for agricultural operations.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>⚙️ Specialised Equipment</h3>
+
+            <p>
+                Cranes, forklifts, generators, water trucks and
+                other specialised equipment.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CATEGORIES -->
+
+<section class="categories">
+
+    <div class="section-title">
+
+        <h2>Browse Equipment Categories</h2>
+
+        <p>
+            Find the type of machinery required for your project.
+        </p>
+
+    </div>
+
+
+    <div class="cards">
+
+        <div class="category">
+            <div class="icon">🚜</div>
+            <h3>Tractors</h3>
+        </div>
+
+        <div class="category">
+            <div class="icon">🏗️</div>
+            <h3>Excavators</h3>
+        </div>
+
+        <div class="category">
+            <div class="icon">🚧</div>
+            <h3>TLBs</h3>
+        </div>
+
+        <div class="category">
+            <div class="icon">🏭</div>
+            <h3>Bulldozers</h3>
+        </div>
+
+        <div class="category">
+            <div class="icon">🛣️</div>
+            <h3>Graders</h3>
+        </div>
+
+        <div class="category">
+            <div class="icon">🚚</div>
+            <h3>Tipper Trucks</h3>
+        </div>
+
+        <div class="category">
+            <div class="icon">🏗️</div>
+            <h3>Cranes</h3>
+        </div>
+
+        <div class="category">
+            <div class="icon">⚙️</div>
+            <h3>Other Equipment</h3>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- TWO SIDES -->
+
+<section class="two-sided">
+
+    <div class="section-title">
+
+        <h2>One Platform. Two Sides of the Market.</h2>
+
+        <p>
+            EquipLink Africa is designed for both equipment owners
+            and people looking for machinery.
+        </p>
+
+    </div>
+
+
+    <div class="cards">
+
+        <div class="side-card">
+
+            <h3>🏗️ I Have Equipment</h3>
+
+            <p>
+                Put your machinery in front of businesses and
+                contractors looking for equipment.
+            </p>
+
+            <ul>
+                <li>✓ Advertise your machinery</li>
+                <li>✓ Add location</li>
+                <li>✓ Add price/rate</li>
+                <li>✓ Show availability</li>
+                <li>✓ Indicate operator availability</li>
+                <li>✓ Add equipment description</li>
+            </ul>
+
+            <a href="#owners" class="btn primary">
+                Advertise My Equipment
+            </a>
+
+        </div>
+
+
+        <div class="side-card">
+
+            <h3>📋 I Need Equipment</h3>
+
+            <p>
+                Post your equipment requirement and allow equipment
+                owners to respond.
+            </p>
+
+            <ul>
+                <li>✓ Specify machinery required</li>
+                <li>✓ Project location</li>
+                <li>✓ Start date</li>
+                <li>✓ Duration</li>
+                <li>✓ Budget</li>
+                <li>✓ Operator requirement</li>
+            </ul>
+
+            <a href="#borrowers" class="btn secondary">
+                Post My Requirement
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- HOW IT WORKS -->
+
+<section id="how">
+
+    <div class="section-title">
+
+        <h2>How EquipLink Africa Works</h2>
+
+        <p>
+            A simple connection between equipment owners
+            and people who need machinery.
+        </p>
+
+    </div>
+
+
+    <div class="steps">
+
+        <div class="step">
+
+            <div class="step-number">1</div>
+
+            <h3>Post</h3>
+
+            <p>
+                Equipment owners advertise their machinery,
+                while borrowers post their equipment requirements.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">2</div>
+
+            <h3>Discover</h3>
+
+            <p>
+                Users search for equipment or equipment
+                requirements based on their needs and location.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">3</div>
+
+            <h3>Connect</h3>
+
+            <p>
+                Interested parties communicate directly and
+                discuss availability, pricing and project details.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- MACHINE OWNER ADVERTISING -->
+
+<section class="request-section" id="owners">
+
+    <div class="section-title">
+
+        <h2>🛠️ Advertise Your Equipment</h2>
+
+        <p>
+            Equipment owners can advertise machinery available
+            for hire, sale or project use.
+        </p>
+
+    </div>
+
+
+    <div class="form-area">
+
+        <h3>Equipment Owner Advertisement</h3>
+
+        <p>
+            Give potential customers enough information to
+            understand what you have available.
+        </p>
+
+
+        <form id="ownerForm">
 
             <div class="form-group">
-                <label for="name">Full Name *</label>
-                <input type="text" id="name" required>
+
+                <label>Owner / Company Name</label>
+
+                <input
+                    type="text"
+                    placeholder="Your name or company name"
+                    required>
+
             </div>
 
-            <div class="form-group">
-                <label for="company">Company / Business Name</label>
-                <input type="text" id="company">
-            </div>
 
             <div class="form-group">
-                <label for="phone">Phone / WhatsApp Number *</label>
-                <input type="tel" id="phone" required>
-            </div>
 
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email">
-            </div>
+                <label>Equipment Type</label>
 
-            <div class="form-group">
-                <label for="equipment">Type of Equipment *</label>
+                <select required>
 
-                <select id="equipment" required>
-
-                    <option value="">Select equipment type</option>
+                    <option value="">
+                        Select equipment
+                    </option>
 
                     <option>Excavator</option>
+                    <option>TLB / Backhoe Loader</option>
                     <option>Bulldozer</option>
+                    <option>Motor Grader</option>
                     <option>Wheel Loader</option>
-                    <option>Grader</option>
+                    <option>Tipper Truck</option>
                     <option>Crane</option>
-                    <option>Dump Truck</option>
+                    <option>Forklift</option>
                     <option>Tractor</option>
-                    <option>Harvester</option>
-                    <option>Generator</option>
+                    <option>Water Truck</option>
                     <option>Mining Equipment</option>
-                    <option>Trailer</option>
-                    <option>Specialised Equipment</option>
+                    <option>Generator</option>
                     <option>Other</option>
 
                 </select>
 
             </div>
 
+
             <div class="form-group">
-                <label for="condition">Equipment Condition</label>
 
-                <select id="condition">
+                <label>Make / Model</label>
 
-                    <option>New</option>
-                    <option>Used</option>
-                    <option>Either New or Used</option>
+                <input
+                    type="text"
+                    placeholder="Example: CAT 320">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Year</label>
+
+                <input
+                    type="text"
+                    placeholder="Example: 2022">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Advertisement Type</label>
+
+                <select>
+
+                    <option>For Hire</option>
+                    <option>For Sale</option>
+                    <option>Hire or Sale</option>
+                    <option>Available for Projects</option>
 
                 </select>
 
             </div>
 
-            <div class="form-group">
-                <label for="quantity">Quantity Required</label>
-                <input type="number" id="quantity" min="1" value="1">
-            </div>
 
             <div class="form-group">
-                <label for="location">Delivery / Operating Location</label>
-                <input type="text" id="location"
-                       placeholder="e.g. Thabazimbi, Limpopo">
-            </div>
 
-            <div class="form-group">
-                <label for="budget">Estimated Budget</label>
-                <input type="text" id="budget"
-                       placeholder="e.g. R500,000">
-            </div>
+                <label>Price / Rental Rate</label>
 
-            <div class="form-group">
-                <label for="details">Additional Requirements</label>
-
-                <textarea id="details"
-                    placeholder="Describe the equipment you need, specifications, preferred brand, capacity, etc."></textarea>
+                <input
+                    type="text"
+                    placeholder="Example: R2,500 per day">
 
             </div>
 
-            <button type="submit" class="submit-button">
-                Send Equipment Request
+
+            <div class="form-group">
+
+                <label>Equipment Location</label>
+
+                <input
+                    type="text"
+                    placeholder="Town / City / Province / Country"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Availability</label>
+
+                <select>
+
+                    <option>Available immediately</option>
+                    <option>Available soon</option>
+                    <option>Available from a specific date</option>
+                    <option>Currently unavailable</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Operator Available?</label>
+
+                <select>
+
+                    <option>Yes</option>
+                    <option>No</option>
+                    <option>Negotiable</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Equipment Condition</label>
+
+                <select>
+
+                    <option>Excellent</option>
+                    <option>Good</option>
+                    <option>Fair</option>
+                    <option>Needs Repair</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Equipment Description</label>
+
+                <textarea
+                    placeholder="Describe the equipment, capacity, condition, services and anything customers should know."></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Equipment Photo</label>
+
+                <input type="file" accept="image/*">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>WhatsApp / Phone</label>
+
+                <input
+                    type="tel"
+                    placeholder="Your phone number"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Email</label>
+
+                <input
+                    type="email"
+                    placeholder="Your email address">
+
+            </div>
+
+
+            <button class="submit" type="submit">
+                Advertise My Equipment
             </button>
+
+
+            <div class="success" id="ownerSuccess">
+                Your equipment advertisement has been submitted.
+            </div>
 
         </form>
 
@@ -394,72 +986,379 @@ footer {
 
 </section>
 
-<section class="contact" id="contact">
 
-    <h2>Contact EquipLink Africa</h2>
+<!-- BORROWER ADVERTISING -->
 
-    <div class="contact-item">
-        📱 WhatsApp:
-        <a href="https://wa.me/27791040241" target="_blank">
-            +27 79 104 0241
-        </a>
+<section id="borrowers">
+
+    <div class="section-title">
+
+        <h2>📋 Post Your Equipment Requirement</h2>
+
+        <p>
+            Need machinery for construction, mining, agriculture
+            or another project? Tell equipment owners what you need.
+        </p>
+
     </div>
 
-    <div class="contact-item">
-        ☎️ Phone:
-        <a href="tel:+27786385251">
-            +27 78 638 5251
-        </a>
-    </div>
 
-    <div class="contact-item">
-        📧 Email:
-        <a href="mailto:Shadreckthemba7@gmail.com">
-            Shadreckthemba7@gmail.com
-        </a>
+    <div class="form-area">
+
+        <h3>Equipment Requirement</h3>
+
+        <p>
+            Your requirement can help equipment owners identify
+            potential business opportunities.
+        </p>
+
+
+        <form id="borrowerForm">
+
+            <div class="form-group">
+
+                <label>Client / Company Name</label>
+
+                <input
+                    type="text"
+                    placeholder="Your name or company name"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Machinery Required</label>
+
+                <select required>
+
+                    <option value="">
+                        Select machinery
+                    </option>
+
+                    <option>Excavator</option>
+                    <option>TLB / Backhoe Loader</option>
+                    <option>Bulldozer</option>
+                    <option>Motor Grader</option>
+                    <option>Wheel Loader</option>
+                    <option>Tipper Truck</option>
+                    <option>Crane</option>
+                    <option>Forklift</option>
+                    <option>Tractor</option>
+                    <option>Water Truck</option>
+                    <option>Mining Equipment</option>
+                    <option>Generator</option>
+                    <option>Other</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Hire / Purchase</label>
+
+                <select>
+
+                    <option>Hire</option>
+                    <option>Purchase</option>
+                    <option>Either</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Quantity Required</label>
+
+                <input
+                    type="number"
+                    min="1"
+                    placeholder="Example: 2">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Project Location</label>
+
+                <input
+                    type="text"
+                    placeholder="Town / City / Province / Country"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Project Description</label>
+
+                <textarea
+                    placeholder="Describe the work the machinery will be used for."></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Start Date</label>
+
+                <input type="date">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Duration</label>
+
+                <input
+                    type="text"
+                    placeholder="Example: 2 weeks / 3 months">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Equipment Condition Required</label>
+
+                <select>
+
+                    <option>Any condition suitable for the work</option>
+                    <option>Excellent</option>
+                    <option>Good</option>
+                    <option>New / Nearly New</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Operator Required?</label>
+
+                <select>
+
+                    <option>Yes</option>
+                    <option>No</option>
+                    <option>Either</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Budget / Rate</label>
+
+                <input
+                    type="text"
+                    placeholder="Example: R2,000 - R3,000 per day">
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Additional Requirements</label>
+
+                <textarea
+                    placeholder="Add any other requirements."></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>WhatsApp / Phone</label>
+
+                <input
+                    type="tel"
+                    placeholder="Your phone number"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Email</label>
+
+                <input
+                    type="email"
+                    placeholder="Your email address">
+
+            </div>
+
+
+            <button class="submit" type="submit">
+                Post Equipment Requirement
+            </button>
+
+
+            <div class="success" id="borrowerSuccess">
+                Your equipment requirement has been submitted.
+            </div>
+
+        </form>
+
     </div>
 
 </section>
 
+
+<!-- PROJECT OPPORTUNITIES -->
+
+<section class="opportunities">
+
+    <div class="section-title">
+
+        <h2>🚧 Project & Business Opportunities</h2>
+
+        <p>
+            EquipLink Africa can grow beyond simple equipment
+            advertising by connecting machinery with real projects.
+        </p>
+
+    </div>
+
+
+    <div class="cards">
+
+        <div class="card">
+
+            <h3>Project Equipment</h3>
+
+            <p>
+                Help businesses identify the machinery needed
+                for construction, mining, agricultural and
+                infrastructure projects.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>Equipment Networks</h3>
+
+            <p>
+                Build connections between equipment owners,
+                contractors, operators and businesses.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>Future Project Services</h3>
+
+            <p>
+                The platform can eventually expand into
+                coordinating equipment, operators and
+                subcontractors for larger projects.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section class="contact" id="contact">
+
+    <h2>Contact EquipLink Africa</h2>
+
+    <p>
+        Have equipment to advertise or need machinery?
+    </p>
+
+    <p>
+        WhatsApp:
+        <a href="https://wa.me/27791040241">
+            +27 79 104 0241
+        </a>
+    </p>
+
+    <p>
+        Phone:
+        <a href="tel:+27786385251">
+            +27 78 638 5251
+        </a>
+    </p>
+
+    <p>
+        Email:
+        <a href="mailto:Shadreckthemba7@gmail.com">
+            Shadreckthemba7@gmail.com
+        </a>
+    </p>
+
+</section>
+
+
+<!-- FOOTER -->
+
 <footer>
-    <p>© 2026 EquipLink Africa. All Rights Reserved.</p>
+
+    <p>
+        © 2026 EquipLink Africa
+    </p>
+
+    <p>
+        Connecting Equipment With Opportunity Across Africa.
+    </p>
+
 </footer>
+
 
 <script>
 
-function sendRequest(event) {
+/* OWNER FORM */
+
+document.getElementById("ownerForm")
+.addEventListener("submit", function(event) {
 
     event.preventDefault();
 
-    const name = document.getElementById("name").value;
-    const company = document.getElementById("company").value;
-    const phone = document.getElementById("phone").value;
-    const email = document.getElementById("email").value;
-    const equipment = document.getElementById("equipment").value;
-    const condition = document.getElementById("condition").value;
-    const quantity = document.getElementById("quantity").value;
-    const location = document.getElementById("location").value;
-    const budget = document.getElementById("budget").value;
-    const details = document.getElementById("details").value;
+    document.getElementById("ownerSuccess")
+    .style.display = "block";
 
-    const message =
-        "EQUIPMENT REQUEST - EQUIPLINK AFRICA%0A%0A" +
-        "Name: " + encodeURIComponent(name) + "%0A" +
-        "Company: " + encodeURIComponent(company) + "%0A" +
-        "Phone/WhatsApp: " + encodeURIComponent(phone) + "%0A" +
-        "Email: " + encodeURIComponent(email) + "%0A" +
-        "Equipment: " + encodeURIComponent(equipment) + "%0A" +
-        "Condition: " + encodeURIComponent(condition) + "%0A" +
-        "Quantity: " + encodeURIComponent(quantity) + "%0A" +
-        "Location: " + encodeURIComponent(location) + "%0A" +
-        "Budget: " + encodeURIComponent(budget) + "%0A" +
-        "Additional Requirements: " + encodeURIComponent(details);
+    alert(
+        "Thank you! Your equipment advertisement has been submitted."
+    );
 
-    const whatsappURL =
-        "https://wa.me/27791040241?text=" + message;
+});
 
-    window.open(whatsappURL, "_blank");
-}
+
+/* BORROWER FORM */
+
+document.getElementById("borrowerForm")
+.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    document.getElementById("borrowerSuccess")
+    .style.display = "block";
+
+    alert(
+        "Thank you! Your equipment requirement has been submitted."
+    );
+
+});
 
 </script>
 
