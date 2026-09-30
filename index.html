@@ -1,1064 +1,860 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>EquipLink Africa | Equipment Marketplace</title>
+  <title>EquipLink Africa</title>
 
-<style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-}
+  <!-- Appwrite SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/appwrite@18.0.0"></script>
 
-body {
-    background: #f5f7f8;
-    color: #222;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
 
-header {
-    background: #123b2a;
-    color: white;
-    padding: 18px 7%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
+    body {
+      background: #f5f7f6;
+      color: #222;
+    }
 
-.logo {
-    font-size: 25px;
-    font-weight: bold;
-}
+    header {
+      background: #123d2b;
+      color: white;
+      padding: 18px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
 
-.logo span {
-    color: #f5b942;
-}
+    .logo {
+      font-size: 25px;
+      font-weight: bold;
+    }
 
-nav a {
-    color: white;
-    text-decoration: none;
-    margin-left: 20px;
-    font-size: 14px;
-}
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 18px;
+      font-size: 15px;
+    }
 
-.hero {
-    background: linear-gradient(rgba(18,59,42,.85),rgba(18,59,42,.85)),
-    url("https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1600&q=80");
-    background-size: cover;
-    background-position: center;
-    color: white;
-    text-align: center;
-    padding: 90px 20px;
-}
+    .hero {
+      background: linear-gradient(
+        rgba(0,0,0,.55),
+        rgba(0,0,0,.55)
+      ),
+      url("https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1600&q=80");
 
-.hero h1 {
-    font-size: 45px;
-    margin-bottom: 15px;
-}
+      background-size: cover;
+      background-position: center;
 
-.hero p {
-    font-size: 19px;
-    max-width: 750px;
-    margin: auto;
-}
-
-.buttons {
-    margin-top: 30px;
-}
-
-.btn {
-    display: inline-block;
-    padding: 13px 22px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: bold;
-    margin: 5px;
-    border: none;
-    cursor: pointer;
-}
-
-.primary {
-    background: #f5b942;
-    color: #111;
-}
-
-.secondary {
-    background: white;
-    color: #123b2a;
-}
-
-section {
-    padding: 60px 7%;
-}
-
-.section-title {
-    text-align: center;
-    margin-bottom: 35px;
-}
-
-.section-title h2 {
-    font-size: 30px;
-    color: #123b2a;
-}
-
-.section-title p {
-    margin-top: 8px;
-    color: #666;
-}
-
-.features {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-    gap: 20px;
-}
-
-.feature {
-    background: white;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 3px 12px rgba(0,0,0,.08);
-}
-
-.feature h3 {
-    margin-bottom: 10px;
-    color: #123b2a;
-}
-
-.search-box {
-    max-width: 850px;
-    margin: auto;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 3px 12px rgba(0,0,0,.08);
-}
-
-.search-box input,
-.search-box select {
-    width: 100%;
-    padding: 13px;
-    margin-bottom: 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-}
-
-.equipment-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
-    gap: 22px;
-    margin-top: 30px;
-}
-
-.card {
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 3px 12px rgba(0,0,0,.08);
-}
-
-.card img {
-    width: 100%;
-    height: 190px;
-    object-fit: cover;
-}
-
-.card-content {
-    padding: 20px;
-}
-
-.card-content h3 {
-    color: #123b2a;
-    margin-bottom: 10px;
-}
-
-.card-content p {
-    margin: 7px 0;
-    color: #555;
-}
-
-.whatsapp {
-    display: inline-block;
-    background: #25D366;
-    color: white;
-    padding: 11px 15px;
-    border-radius: 6px;
-    text-decoration: none;
-    margin-top: 12px;
-    font-weight: bold;
-}
-
-.form-section {
-    background: #123b2a;
-    color: white;
-}
-
-.form-container {
-    max-width: 800px;
-    margin: auto;
-    background: white;
-    color: #222;
-    padding: 30px;
-    border-radius: 12px;
-}
-
-.form-container h3 {
-    color: #123b2a;
-    margin-bottom: 20px;
-}
-
-.form-container input,
-.form-container select,
-.form-container textarea {
-    width: 100%;
-    padding: 13px;
-    margin-bottom: 14px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-}
-
-.form-container textarea {
-    min-height: 120px;
-    resize: vertical;
-}
-
-.submit-btn {
-    width: 100%;
-    background: #f5b942;
-    border: none;
-    padding: 14px;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.about {
-    background: white;
-}
-
-.steps {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
-    gap: 20px;
-    text-align: center;
-}
-
-.step {
-    padding: 25px;
-}
-
-.step-number {
-    width: 45px;
-    height: 45px;
-    line-height: 45px;
-    border-radius: 50%;
-    background: #f5b942;
-    margin: auto auto 15px;
-    font-weight: bold;
-}
-
-footer {
-    background: #0c271c;
-    color: white;
-    text-align: center;
-    padding: 30px 15px;
-}
-
-footer p {
-    margin: 7px;
-    color: #ddd;
-}
-
-@media(max-width:700px) {
-    nav {
-        display: none;
+      min-height: 430px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      padding: 30px;
     }
 
     .hero h1 {
-        font-size: 34px;
+      font-size: 45px;
+      margin-bottom: 15px;
     }
-}
-</style>
+
+    .hero p {
+      font-size: 19px;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .buttons {
+      margin-top: 25px;
+    }
+
+    button,
+    .button {
+      background: #f2a900;
+      border: none;
+      padding: 13px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      text-decoration: none;
+      color: #111;
+      display: inline-block;
+      margin: 5px;
+    }
+
+    button:hover,
+    .button:hover {
+      opacity: .88;
+    }
+
+    section {
+      padding: 50px 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #123d2b;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 3px 12px rgba(0,0,0,.08);
+    }
+
+    .card h3 {
+      color: #123d2b;
+      margin-bottom: 10px;
+    }
+
+    .form-container {
+      max-width: 750px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 3px 15px rgba(0,0,0,.08);
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 15px;
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .private-notice {
+      background: #eef7f1;
+      border-left: 5px solid #123d2b;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+    }
+
+    .status {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 6px;
+      display: none;
+    }
+
+    .success {
+      background: #dff3e5;
+      color: #145c2d;
+    }
+
+    .error {
+      background: #ffe1e1;
+      color: #8b0000;
+    }
+
+    .equipment-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .equipment-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 3px 12px rgba(0,0,0,.08);
+    }
+
+    .equipment-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .equipment-info {
+      padding: 18px;
+    }
+
+    .private-contact {
+      background: #f3f3f3;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      font-size: 13px;
+      color: #555;
+    }
+
+    footer {
+      background: #123d2b;
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+      margin-top: 40px;
+    }
+
+    @media(max-width: 600px) {
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      nav {
+        margin-top: 10px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
 <header>
+  <div class="logo">EquipLink Africa</div>
 
-<div class="logo">
-Equip<span>Link</span> Africa
-</div>
-
-<nav>
-<a href="#home">Home</a>
-<a href="#equipment">Equipment</a>
-<a href="#owners">List Equipment</a>
-<a href="#borrowers">Request Equipment</a>
-<a href="#about">About</a>
-</nav>
-
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#equipment">Equipment</a>
+    <a href="#owner">List Equipment</a>
+    <a href="#request">Request Equipment</a>
+  </nav>
 </header>
 
 
-<!-- HERO -->
+<!-- HOME -->
 
 <section class="hero" id="home">
+  <div>
+    <h1>EquipLink Africa</h1>
 
-<h1>Connecting Africa's Equipment</h1>
+    <p>
+      Connecting equipment owners with people and businesses
+      that need machinery across Africa.
+    </p>
 
-<p>
-Find machinery, equipment and operators for construction,
-mining, agriculture, infrastructure and other projects across Africa.
-</p>
+    <div class="buttons">
+      <a class="button" href="#equipment">
+        Find Equipment
+      </a>
 
-<div class="buttons">
-
-<a href="#equipment" class="btn primary">
-Find Equipment
-</a>
-
-<a href="#owners" class="btn secondary">
-List Your Equipment
-</a>
-
-</div>
-
+      <a class="button" href="#owner">
+        List Your Equipment
+      </a>
+    </div>
+  </div>
 </section>
 
 
-<!-- FEATURES -->
+<!-- HOW IT WORKS -->
 
 <section>
+  <h2 class="section-title">How EquipLink Works</h2>
 
-<div class="section-title">
+  <div class="cards">
 
-<h2>What EquipLink Africa Does</h2>
+    <div class="card">
+      <h3>1. Owners List Equipment</h3>
+      <p>
+        Equipment owners provide details about their
+        machinery, availability, location and price.
+      </p>
+    </div>
 
-<p>
-A marketplace connecting equipment owners with businesses that need machinery.
-</p>
+    <div class="card">
+      <h3>2. Customers Request Equipment</h3>
+      <p>
+        Customers search for equipment and submit
+        a request through EquipLink.
+      </p>
+    </div>
 
-</div>
+    <div class="card">
+      <h3>3. EquipLink Connects Both Sides</h3>
+      <p>
+        EquipLink manages the request while keeping
+        personal contact information private.
+      </p>
+    </div>
 
-<div class="features">
+    <div class="card">
+      <h3>4. Secure Transaction</h3>
+      <p>
+        Once the platform and payment systems are
+        fully implemented, transactions can be processed
+        through EquipLink.
+      </p>
+    </div>
 
-<div class="feature">
-<h3>🏗️ Equipment Marketplace</h3>
-<p>
-Owners can advertise excavators, graders, bulldozers, trucks,
-cranes and other machinery.
-</p>
-</div>
-
-<div class="feature">
-<h3>🔎 Find Machinery</h3>
-<p>
-Businesses can search for equipment according to their project requirements.
-</p>
-</div>
-
-<div class="feature">
-<h3>🤝 Connect Directly</h3>
-<p>
-Equipment owners and potential borrowers can communicate directly.
-</p>
-</div>
-
-<div class="feature">
-<h3>🌍 Across Africa</h3>
-<p>
-The platform is designed to eventually connect equipment markets across African countries.
-</p>
-</div>
-
-</div>
-
+  </div>
 </section>
 
 
-<!-- SEARCH -->
+<!-- EQUIPMENT -->
 
 <section id="equipment">
 
-<div class="section-title">
+  <h2 class="section-title">
+    Available Equipment
+  </h2>
 
-<h2>Find Equipment</h2>
+  <div id="equipmentList" class="equipment-grid">
 
-<p>Search the available machinery listed on EquipLink Africa.</p>
+    <div class="card">
+      <h3>Equipment listings will appear here</h3>
 
-</div>
+      <p>
+        Equipment registered by owners will be displayed
+        here once the Appwrite database is connected.
+      </p>
+    </div>
 
-<div class="search-box">
-
-<input
-type="text"
-id="searchInput"
-placeholder="Search equipment e.g. excavator, truck, grader..."
-onkeyup="searchEquipment()"
->
-
-<select id="categoryFilter" onchange="searchEquipment()">
-
-<option value="">All Categories</option>
-<option value="Construction">Construction</option>
-<option value="Mining">Mining</option>
-<option value="Agriculture">Agriculture</option>
-<option value="Transport">Transport</option>
-<option value="Infrastructure">Infrastructure</option>
-
-</select>
-
-</div>
-
-
-<div class="equipment-grid" id="equipmentList">
-
-
-<!-- EQUIPMENT 1 -->
-
-<div class="card equipment-card"
-data-name="Excavator"
-data-category="Construction">
-
-<img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80">
-
-<div class="card-content">
-
-<h3>20-Ton Excavator</h3>
-
-<p><strong>Category:</strong> Construction</p>
-
-<p><strong>Location:</strong> Limpopo, South Africa</p>
-
-<p><strong>Availability:</strong> Available</p>
-
-<p><strong>Operator:</strong> Available</p>
-
-<a class="whatsapp"
-href="https://wa.me/27000000000"
-target="_blank">
-
-WhatsApp Owner
-
-</a>
-
-</div>
-
-</div>
-
-
-<!-- EQUIPMENT 2 -->
-
-<div class="card equipment-card"
-data-name="Tipper Truck"
-data-category="Mining">
-
-<img src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=800&q=80">
-
-<div class="card-content">
-
-<h3>Tipper Truck</h3>
-
-<p><strong>Category:</strong> Mining</p>
-
-<p><strong>Location:</strong> Mpumalanga, South Africa</p>
-
-<p><strong>Availability:</strong> Available</p>
-
-<p><strong>Operator:</strong> Available</p>
-
-<a class="whatsapp"
-href="https://wa.me/27000000000"
-target="_blank">
-
-WhatsApp Owner
-
-</a>
-
-</div>
-
-</div>
-
-
-<!-- EQUIPMENT 3 -->
-
-<div class="card equipment-card"
-data-name="Motor Grader"
-data-category="Infrastructure">
-
-<img src="https://images.unsplash.com/photo-1590496793929-36417d3117de?auto=format&fit=crop&w=800&q=80">
-
-<div class="card-content">
-
-<h3>Motor Grader</h3>
-
-<p><strong>Category:</strong> Infrastructure</p>
-
-<p><strong>Location:</strong> Gauteng, South Africa</p>
-
-<p><strong>Availability:</strong> Available</p>
-
-<p><strong>Operator:</strong> Available</p>
-
-<a class="whatsapp"
-href="https://wa.me/27000000000"
-target="_blank">
-
-WhatsApp Owner
-
-</a>
-
-</div>
-
-</div>
-
-</div>
+  </div>
 
 </section>
 
 
 <!-- OWNER FORM -->
 
-<section class="form-section" id="owners">
+<section id="owner">
 
-<div class="section-title">
+  <h2 class="section-title">
+    List Your Equipment
+  </h2>
 
-<h2 style="color:white;">
-Advertise Your Equipment
-</h2>
+  <div class="form-container">
 
-<p style="color:#ddd;">
-Equipment owners can submit their machinery to be advertised on EquipLink Africa.
-</p>
+    <div class="private-notice">
+      🔒 <strong>Your contact information is private.</strong>
+      Your phone number and email address will NOT be
+      displayed publicly on the equipment listing.
+      EquipLink will use the information to facilitate
+      legitimate requests.
+    </div>
 
-</div>
+    <form id="ownerForm">
 
+      <label>Full Name / Company Name</label>
+      <input
+        type="text"
+        id="ownerName"
+        required
+      >
 
-<div class="form-container">
+      <label>Phone / WhatsApp</label>
+      <input
+        type="tel"
+        id="ownerPhone"
+        required
+      >
 
-<h3>Equipment Owner Registration</h3>
+      <label>Email Address</label>
+      <input
+        type="email"
+        id="ownerEmail"
+        required
+      >
 
-<form onsubmit="submitOwner(event)">
+      <label>Equipment Type</label>
 
-<input
-type="text"
-id="ownerName"
-placeholder="Full Name / Company Name"
-required
->
+      <select id="equipmentType" required>
 
-<input
-type="tel"
-id="ownerPhone"
-placeholder="Phone / WhatsApp Number"
-required
->
+        <option value="">
+          Select equipment
+        </option>
 
-<input
-type="email"
-id="ownerEmail"
-placeholder="Email Address"
->
+        <option>Excavator</option>
+        <option>Bulldozer</option>
+        <option>Backhoe Loader</option>
+        <option>Wheel Loader</option>
+        <option>Grader</option>
+        <option>Dump Truck</option>
+        <option>Crane</option>
+        <option>Tractor</option>
+        <option>Water Truck</option>
+        <option>Honey Sucker</option>
+        <option>Generator</option>
+        <option>Forklift</option>
+        <option>Other</option>
 
-<select id="ownerCategory" required>
+      </select>
 
-<option value="">Select Equipment Category</option>
+      <label>Equipment Name / Model</label>
 
-<option>Construction</option>
-<option>Mining</option>
-<option>Agriculture</option>
-<option>Transport</option>
-<option>Infrastructure</option>
-<option>Other</option>
+      <input
+        type="text"
+        id="equipmentName"
+        required
+      >
 
-</select>
+      <label>Location</label>
 
+      <input
+        type="text"
+        id="equipmentLocation"
+        placeholder="Town / City / Province"
+        required
+      >
 
-<input
-type="text"
-id="equipmentName"
-placeholder="Equipment / Machinery Name"
-required
->
+      <label>Price</label>
 
+      <input
+        type="number"
+        id="equipmentPrice"
+        placeholder="R"
+        required
+      >
 
-<input
-type="text"
-id="equipmentModel"
-placeholder="Equipment Model / Year"
->
+      <label>Availability</label>
 
+      <select id="availability" required>
 
-<input
-type="text"
-id="equipmentLocation"
-placeholder="Equipment Location"
-required
->
+        <option value="">
+          Select availability
+        </option>
 
+        <option>Available now</option>
+        <option>Available on specific dates</option>
+        <option>Currently unavailable</option>
 
-<select id="operator">
+      </select>
 
-<option value="">Operator Availability</option>
+      <label>Equipment Description</label>
 
-<option>Operator Available</option>
-<option>Operator Not Available</option>
+      <textarea
+        id="equipmentDescription"
+        placeholder="Describe the equipment, condition, capacity, etc."
+        required
+      ></textarea>
 
-</select>
+      <label>Equipment Photo</label>
 
+      <input
+        type="file"
+        id="equipmentPhoto"
+        accept="image/*"
+      >
 
-<select id="availability">
+      <button type="submit">
+        Submit Equipment
+      </button>
 
-<option value="">Equipment Availability</option>
+    </form>
 
-<option>Available Now</option>
-<option>Available Later</option>
-</select>
+    <div id="ownerStatus" class="status"></div>
 
-
-<textarea
-id="ownerDescription"
-placeholder="Describe your equipment, rental terms, capacity, etc."
-></textarea>
-
-
-<button class="submit-btn" type="submit">
-
-Submit Equipment
-
-</button>
-
-</form>
-
-</div>
+  </div>
 
 </section>
 
 
-<!-- BORROWER FORM -->
+<!-- CUSTOMER REQUEST -->
 
-<section id="borrowers">
+<section id="request">
 
-<div class="section-title">
+  <h2 class="section-title">
+    Request Equipment
+  </h2>
 
-<h2>Request Equipment</h2>
+  <div class="form-container">
 
-<p>
-Tell equipment owners what machinery you need for your project.
-</p>
+    <div class="private-notice">
+      🔒 <strong>Your information is private.</strong>
+      Your contact information will only be used by
+      EquipLink to process your equipment request.
+    </div>
 
-</div>
+    <form id="requestForm">
 
+      <label>Full Name / Company Name</label>
 
-<div class="form-container">
+      <input
+        type="text"
+        id="customerName"
+        required
+      >
 
-<h3>Equipment Request Form</h3>
+      <label>Phone / WhatsApp</label>
 
-<form onsubmit="submitBorrower(event)">
+      <input
+        type="tel"
+        id="customerPhone"
+        required
+      >
 
-<input
-type="text"
-id="borrowerName"
-placeholder="Full Name / Company Name"
-required
->
+      <label>Email Address</label>
 
-<input
-type="tel"
-id="borrowerPhone"
-placeholder="Phone / WhatsApp Number"
-required
->
+      <input
+        type="email"
+        id="customerEmail"
+        required
+      >
 
-<input
-type="email"
-id="borrowerEmail"
-placeholder="Email Address"
->
+      <label>Equipment Required</label>
 
+      <input
+        type="text"
+        id="requestedEquipment"
+        placeholder="e.g. 20-ton excavator"
+        required
+      >
 
-<select id="borrowerCategory" required>
+      <label>Location</label>
 
-<option value="">Type of Machinery Needed</option>
+      <input
+        type="text"
+        id="customerLocation"
+        placeholder="Where is the equipment needed?"
+        required
+      >
 
-<option>Excavator</option>
-<option>Bulldozer</option>
-<option>Motor Grader</option>
-<option>Tipper Truck</option>
-<option>Crane</option>
-<option>Tractor</option>
-<option>Loader</option>
-<option>Compactor</option>
-<option>Other</option>
+      <label>Required From</label>
 
-</select>
+      <input
+        type="date"
+        id="startDate"
+        required
+      >
 
+      <label>Required Until</label>
 
-<input
-type="number"
-id="quantity"
-placeholder="Quantity Required"
-min="1"
->
+      <input
+        type="date"
+        id="endDate"
+        required
+      >
 
+      <label>Rental / Purchase</label>
 
-<input
-type="text"
-id="projectLocation"
-placeholder="Project Location"
-required
->
+      <select id="transactionType" required>
 
+        <option value="">
+          Select option
+        </option>
 
-<input
-type="date"
-id="startDate"
->
+        <option>Rent</option>
+        <option>Buy</option>
+        <option>Hire with operator</option>
 
+      </select>
 
-<input
-type="date"
-id="endDate"
->
+      <label>Additional Information</label>
 
+      <textarea
+        id="customerMessage"
+        placeholder="Tell us about your project or requirements."
+      ></textarea>
 
-<textarea
-id="projectDescription"
-placeholder="Describe your project and equipment requirements"
-></textarea>
+      <button type="submit">
+        Send Request
+      </button>
 
+    </form>
 
-<button class="submit-btn" type="submit">
+    <div id="requestStatus" class="status"></div>
 
-Submit Equipment Request
-
-</button>
-
-</form>
-
-</div>
-
-</section>
-
-
-<!-- HOW IT WORKS -->
-
-<section class="about" id="about">
-
-<div class="section-title">
-
-<h2>How EquipLink Africa Works</h2>
-
-</div>
-
-
-<div class="steps">
-
-<div class="step">
-
-<div class="step-number">1</div>
-
-<h3>Owner Lists Equipment</h3>
-
-<p>
-Equipment owners submit their machinery and availability.
-</p>
-
-</div>
-
-
-<div class="step">
-
-<div class="step-number">2</div>
-
-<h3>Customer Searches</h3>
-
-<p>
-Businesses search for equipment based on their project requirements.
-</p>
-
-</div>
-
-
-<div class="step">
-
-<div class="step-number">3</div>
-
-<h3>Connection</h3>
-
-<p>
-The customer contacts the equipment owner.
-</p>
-
-</div>
-
-
-<div class="step">
-
-<div class="step-number">4</div>
-
-<h3>Deal</h3>
-
-<p>
-The parties discuss pricing, transportation, operators and project terms.
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- FUTURE PLATFORM -->
-
-<section>
-
-<div class="section-title">
-
-<h2>The Future of EquipLink Africa</h2>
-
-<p>
-The platform can grow beyond equipment advertising.
-</p>
-
-</div>
-
-
-<div class="features">
-
-<div class="feature">
-
-<h3>📱 Mobile Platform</h3>
-
-<p>
-Users can eventually access EquipLink Africa through a dedicated mobile application.
-</p>
-
-</div>
-
-
-<div class="feature">
-
-<h3>🗺️ Equipment Database</h3>
-
-<p>
-A structured database can store equipment, owners, locations,
-availability and project requests.
-</p>
-
-</div>
-
-
-<div class="feature">
-
-<h3>📋 Project Contracts</h3>
-
-<p>
-EquipLink Africa can eventually identify projects requiring machinery
-and coordinate equipment and operators.
-</p>
-
-</div>
-
-
-<div class="feature">
-
-<h3>🌍 African Expansion</h3>
-
-<p>
-The platform can eventually expand from South Africa into other African markets.
-</p>
-
-</div>
-
-</div>
+  </div>
 
 </section>
 
 
 <footer>
 
-<h2>EquipLink Africa</h2>
+  <h3>EquipLink Africa</h3>
 
-<p>Connecting Equipment With Opportunity.</p>
+  <p>
+    Connecting Africa with the equipment it needs.
+  </p>
 
-<p>© 2026 EquipLink Africa</p>
+  <p style="margin-top:15px;">
+    © 2026 EquipLink Africa
+  </p>
 
 </footer>
 
 
 <script>
 
-/* EQUIPMENT SEARCH */
+/*
+==========================================================
+APPWRITE CONFIGURATION
+==========================================================
 
-function searchEquipment() {
+IMPORTANT:
 
-    let input =
-    document.getElementById("searchInput")
-    .value
-    .toLowerCase();
+Replace the values below with the IDs from YOUR Appwrite
+project.
 
-    let category =
-    document.getElementById("categoryFilter")
-    .value;
+Do NOT put private API keys in this website.
 
-    let cards =
-    document.querySelectorAll(".equipment-card");
-
-    cards.forEach(function(card) {
-
-        let name =
-        card.dataset.name.toLowerCase();
-
-        let cardCategory =
-        card.dataset.category;
-
-        let matchesSearch =
-        name.includes(input);
-
-        let matchesCategory =
-        category === "" ||
-        cardCategory === category;
-
-        if(matchesSearch && matchesCategory) {
-
-            card.style.display = "block";
-
-        } else {
-
-            card.style.display = "none";
-
-        }
-
-    });
-
-}
+The website should use Appwrite's client-side SDK only.
+==========================================================
+*/
 
 
-/* OWNER FORM */
+const APPWRITE_ENDPOINT =
+  "https://cloud.appwrite.io/v1";
 
-function submitOwner(event) {
+const APPWRITE_PROJECT_ID =
+  "YOUR_PROJECT_ID";
 
-    event.preventDefault();
+const DATABASE_ID =
+  "YOUR_DATABASE_ID";
 
-    let name =
-    document.getElementById("ownerName").value;
+const OWNER_COLLECTION_ID =
+  "YOUR_OWNER_COLLECTION_ID";
 
-    let phone =
-    document.getElementById("ownerPhone").value;
-
-    let category =
-    document.getElementById("ownerCategory").value;
-
-    let equipment =
-    document.getElementById("equipmentName").value;
-
-    let location =
-    document.getElementById("equipmentLocation").value;
+const REQUEST_COLLECTION_ID =
+  "YOUR_REQUEST_COLLECTION_ID";
 
 
-    let message =
-    "EQUIPMENT OWNER REGISTRATION%0A%0A" +
+/*
+==========================================================
+APPWRITE INITIALIZATION
+==========================================================
+*/
 
-    "Name/Company: " + name +
-    "%0APhone: " + phone +
-    "%0ACategory: " + category +
-    "%0AEquipment: " + equipment +
-    "%0ALocation: " + location;
+const client = new Appwrite.Client();
 
+client
+  .setEndpoint(APPWRITE_ENDPOINT)
+  .setProject(APPWRITE_PROJECT_ID);
 
-    let whatsappNumber =
-    "27000000000";
-
-
-    window.open(
-        "https://wa.me/" +
-        whatsappNumber +
-        "?text=" +
-        message,
-        "_blank"
-    );
-
-}
+const databases = new Appwrite.Databases(client);
 
 
-/* BORROWER FORM */
+/*
+==========================================================
+OWNER REGISTRATION
+==========================================================
+*/
 
-function submitBorrower(event) {
+document
+  .getElementById("ownerForm")
+  .addEventListener("submit", async function(event) {
 
     event.preventDefault();
 
-    let name =
-    document.getElementById("borrowerName").value;
+    const status =
+      document.getElementById("ownerStatus");
 
-    let phone =
-    document.getElementById("borrowerPhone").value;
+    status.style.display = "block";
 
-    let equipment =
-    document.getElementById("borrowerCategory").value;
+    status.className = "status";
 
-    let quantity =
-    document.getElementById("quantity").value;
+    status.innerText =
+      "Submitting your equipment...";
 
-    let location =
-    document.getElementById("projectLocation").value;
+    try {
 
-    let start =
-    document.getElementById("startDate").value;
+      const ownerData = {
 
-    let end =
-    document.getElementById("endDate").value;
+        ownerName:
+          document.getElementById("ownerName").value,
+
+        ownerPhone:
+          document.getElementById("ownerPhone").value,
+
+        ownerEmail:
+          document.getElementById("ownerEmail").value,
+
+        equipmentType:
+          document.getElementById("equipmentType").value,
+
+        equipmentName:
+          document.getElementById("equipmentName").value,
+
+        location:
+          document.getElementById("equipmentLocation").value,
+
+        price:
+          Number(
+            document.getElementById("equipmentPrice").value
+          ),
+
+        availability:
+          document.getElementById("availability").value,
+
+        description:
+          document.getElementById("equipmentDescription").value,
+
+        status:
+          "Pending Review"
+
+      };
 
 
-    let message =
-    "EQUIPMENT REQUEST%0A%0A" +
+      /*
+      IMPORTANT:
 
-    "Name/Company: " + name +
-    "%0APhone: " + phone +
-    "%0AMachinery Needed: " + equipment +
-    "%0AQuantity: " + quantity +
-    "%0AProject Location: " + location +
-    "%0AStart Date: " + start +
-    "%0AEnd Date: " + end;
+      Contact information is saved in the database.
+
+      It is NOT displayed in the public equipment card.
+      */
+
+      await databases.createDocument(
+
+        DATABASE_ID,
+
+        OWNER_COLLECTION_ID,
+
+        Appwrite.ID.unique(),
+
+        ownerData
+
+      );
 
 
-    let whatsappNumber =
-    "27000000000";
+      status.classList.add("success");
+
+      status.innerText =
+        "Your equipment has been submitted successfully. EquipLink will review the listing.";
+
+      document
+        .getElementById("ownerForm")
+        .reset();
 
 
-    window.open(
-        "https://wa.me/" +
-        whatsappNumber +
-        "?text=" +
-        message,
-        "_blank"
-    );
+    } catch(error) {
 
-}
+      console.error(error);
 
-</script>
+      status.classList.add("error");
 
-<!-- Appwrite -->
-<script src="https://cdn.jsdelivr.net/npm/appwrite@21.4.0"></script>
+      status.innerText =
+        "We could not submit your equipment yet. Please check your Appwrite connection.";
 
-<script>
-    const client = new Appwrite.Client();
+    }
 
-    client
-        .setEndpoint("https://fra.cloud.appwrite.io/v1")
-        .setProject("6ab911bb001660123cfe");
+});
 
-    const tablesDB = new Appwrite.TablesDB(client);
 
-    console.log("EquipLink Africa - Appwrite connected");
+/*
+==========================================================
+CUSTOMER REQUEST
+==========================================================
+*/
+
+document
+  .getElementById("requestForm")
+  .addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const status =
+      document.getElementById("requestStatus");
+
+    status.style.display = "block";
+
+    status.className = "status";
+
+    status.innerText =
+      "Sending your request...";
+
+    try {
+
+      const requestData = {
+
+        customerName:
+          document.getElementById("customerName").value,
+
+        customerPhone:
+          document.getElementById("customerPhone").value,
+
+        customerEmail:
+          document.getElementById("customerEmail").value,
+
+        requestedEquipment:
+          document.getElementById("requestedEquipment").value,
+
+        location:
+          document.getElementById("customerLocation").value,
+
+        startDate:
+          document.getElementById("startDate").value,
+
+        endDate:
+          document.getElementById("endDate").value,
+
+        transactionType:
+          document.getElementById("transactionType").value,
+
+        message:
+          document.getElementById("customerMessage").value,
+
+        status:
+          "New Request"
+
+      };
+
+
+      await databases.createDocument(
+
+        DATABASE_ID,
+
+        REQUEST_COLLECTION_ID,
+
+        Appwrite.ID.unique(),
+
+        requestData
+
+      );
+
+
+      status.classList.add("success");
+
+      status.innerText =
+        "Your request has been received. EquipLink will contact you regarding the next steps.";
+
+      document
+        .getElementById("requestForm")
+        .reset();
+
+
+    } catch(error) {
+
+      console.error(error);
+
+      status.classList.add("error");
+
+      status.innerText =
+        "We could not send your request yet. Please check your Appwrite connection.";
+
+    }
+
+});
+
+
 </script>
 
 </body>
 </html>
-
+```
