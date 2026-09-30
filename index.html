@@ -1044,5 +1044,21 @@ function submitBorrower(event) {
 
 </script>
 
+<!-- Appwrite -->
+<script src="https://cdn.jsdelivr.net/npm/appwrite@17.0.0"></script>
+
+<script>
+    const client = new Appwrite.Client();
+
+    client
+        .setEndpoint("https://fra.cloud.appwrite.io/v1")
+        .setProject("6ab911bb001660123cfe");
+
+    const tablesDB = new Appwrite.TablesDB(client);
+
+    console.log("EquipLink Africa - Appwrite connected");
+</script>
+
 </body>
-       </html>
+</html>
+
