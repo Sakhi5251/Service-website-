@@ -8,7 +8,7 @@
   <title>EquipLink Africa</title>
 
   <!-- Appwrite SDK -->
-  <script src="https://cdn.jsdelivr.net/npm/appwrite@18.0.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/appwrite@19.0.0"></script>
 
   <style>
     * {
@@ -332,8 +332,7 @@
       <h3>Equipment listings will appear here</h3>
 
       <p>
-        Equipment registered by owners will be displayed
-        here once the Appwrite database is connected.
+        Approved equipment listings will be displayed here once the marketplace display is connected.
       </p>
     </div>
 
@@ -393,16 +392,29 @@
 
         <option>Excavator</option>
         <option>Bulldozer</option>
-        <option>Backhoe Loader</option>
+        <option>Backhoe Loader / TLB</option>
         <option>Wheel Loader</option>
         <option>Grader</option>
         <option>Dump Truck</option>
+        <option>Tipper Truck</option>
+        <option>Honey Sucker / Vacuum Truck</option>
+        <option>Water Truck</option>
         <option>Crane</option>
         <option>Tractor</option>
-        <option>Water Truck</option>
-        <option>Honey Sucker</option>
-        <option>Generator</option>
         <option>Forklift</option>
+        <option>Generator</option>
+        <option>Welding Machine</option>
+        <option>Air Compressor</option>
+        <option>Water Pump</option>
+        <option>Pressure Washer</option>
+        <option>Grass Cutter</option>
+        <option>Brush Cutter</option>
+        <option>Chainsaw</option>
+        <option>Wood Chipper</option>
+        <option>Concrete Mixer</option>
+        <option>Plate Compactor</option>
+        <option>Power Tools</option>
+        <option>Mining Equipment</option>
         <option>Other</option>
 
       </select>
@@ -433,6 +445,28 @@
         required
       >
 
+      <label>Listing Type</label>
+
+      <select id="listingType" required>
+        <option value="">Select option</option>
+        <option>Rent</option>
+        <option>Buy</option>
+        <option>Rent or Buy</option>
+        <option>Hire with operator</option>
+      </select>
+
+      <label>Price Period</label>
+
+      <select id="pricePeriod" required>
+        <option value="">Select price period</option>
+        <option>Per hour</option>
+        <option>Per day</option>
+        <option>Per week</option>
+        <option>Per month</option>
+        <option>Total sale price</option>
+        <option>Contact EquipLink</option>
+      </select>
+
       <label>Availability</label>
 
       <select id="availability" required>
@@ -445,6 +479,14 @@
         <option>Available on specific dates</option>
         <option>Currently unavailable</option>
 
+      </select>
+
+      <label>Operator Available?</label>
+
+      <select id="operatorAvailable" required>
+        <option value="">Select option</option>
+        <option>Yes</option>
+        <option>No</option>
       </select>
 
       <label>Equipment Description</label>
@@ -462,6 +504,12 @@
         id="equipmentPhoto"
         accept="image/*"
       >
+
+      <small style="display:block;margin-top:6px;color:#666;">
+        Photo upload will be activated after the EquipLink Appwrite Storage bucket is created.
+      </small>
+
+
 
       <button type="submit">
         Submit Equipment
@@ -602,39 +650,30 @@
 
 
 <script>
-
 /*
 ==========================================================
 APPWRITE CONFIGURATION
 ==========================================================
+These IDs are from the EquipLink Africa Appwrite project.
 
 IMPORTANT:
-
-Replace the values below with the IDs from YOUR Appwrite
-project.
-
-Do NOT put private API keys in this website.
-
-The website should use Appwrite's client-side SDK only.
+- No private API key is used in this public website.
+- This version uses Appwrite TablesDB, matching the
+  "Production TablesDB" database you created.
 ==========================================================
 */
 
+const APPWRITE_ENDPOINT = "https://cloud.appwrite.io/v1";
+const APPWRITE_PROJECT_ID = "6ab911bb001660123cfe";
+const DATABASE_ID = "6ab913d7003c805b81d3";
+const EQUIPMENT_TABLE_ID = "6ab91484001054f14ccc";
 
-const APPWRITE_ENDPOINT =
-  "https://cloud.appwrite.io/v1";
-
-const APPWRITE_PROJECT_ID =
-  "YOUR_PROJECT_ID";
-
-const DATABASE_ID =
-  "YOUR_DATABASE_ID";
-
-const OWNER_COLLECTION_ID =
-  "YOUR_OWNER_COLLECTION_ID";
-
-const REQUEST_COLLECTION_ID =
-  "YOUR_REQUEST_COLLECTION_ID";
-
+/*
+The customer-request table has NOT been created yet.
+We will add it separately after the Equipment table is
+confirmed working. The request form therefore stays safely
+disabled until that table exists.
+*/
 
 /*
 ==========================================================
@@ -648,12 +687,27 @@ client
   .setEndpoint(APPWRITE_ENDPOINT)
   .setProject(APPWRITE_PROJECT_ID);
 
-const databases = new Appwrite.Databases(client);
+const tablesDB = new Appwrite.TablesDB(client);
 
 
 /*
 ==========================================================
-OWNER REGISTRATION
+HELPERS
+==========================================================
+*/
+
+function showStatus(elementId, message, type) {
+  const status = document.getElementById(elementId);
+
+  status.style.display = "block";
+  status.className = "status " + type;
+  status.innerText = message;
+}
+
+
+/*
+==========================================================
+OWNER EQUIPMENT REGISTRATION
 ==========================================================
 */
 
@@ -663,95 +717,102 @@ document
 
     event.preventDefault();
 
-    const status =
-      document.getElementById("ownerStatus");
-
-    status.style.display = "block";
-
-    status.className = "status";
-
-    status.innerText =
-      "Submitting your equipment...";
+    showStatus(
+      "ownerStatus",
+      "Submitting your equipment...",
+      ""
+    );
 
     try {
 
-      const ownerData = {
+      const operatorAvailable =
+        document.getElementById("operatorAvailable")
+          ? document.getElementById("operatorAvailable").value === "Yes"
+          : false;
 
-        ownerName:
-          document.getElementById("ownerName").value,
+      const equipmentData = {
 
-        ownerPhone:
-          document.getElementById("ownerPhone").value,
+        Equipment_name:
+          document.getElementById("equipmentName").value.trim(),
 
-        ownerEmail:
-          document.getElementById("ownerEmail").value,
-
-        equipmentType:
+        Equipment_type:
           document.getElementById("equipmentType").value,
 
-        equipmentName:
-          document.getElementById("equipmentName").value,
+        Description:
+          document.getElementById("equipmentDescription").value.trim(),
 
-        location:
-          document.getElementById("equipmentLocation").value,
+        Location:
+          document.getElementById("equipmentLocation").value.trim(),
 
-        price:
+        Listing_type:
+          document.getElementById("listingType")
+            ? document.getElementById("listingType").value
+            : "Rent",
+
+        Price:
           Number(
             document.getElementById("equipmentPrice").value
           ),
 
-        availability:
+        Price_period:
+          document.getElementById("pricePeriod")
+            ? document.getElementById("pricePeriod").value
+            : "Per day",
+
+        Owner_name:
+          document.getElementById("ownerName").value.trim(),
+
+        owner_phone:
+          document.getElementById("ownerPhone").value.trim(),
+
+        owner_email:
+          document.getElementById("ownerEmail").value.trim(),
+
+        Availability:
           document.getElementById("availability").value,
 
-        description:
-          document.getElementById("equipmentDescription").value,
+        Operator_available:
+          operatorAvailable,
 
-        status:
-          "Pending Review"
-
+        Status:
+          "Pending"
       };
 
-
       /*
-      IMPORTANT:
+      ------------------------------------------------------
+      Create a ROW in the existing Equipment table.
 
-      Contact information is saved in the database.
-
-      It is NOT displayed in the public equipment card.
+      This is the correct TablesDB approach for the table
+      you created in Appwrite.
+      ------------------------------------------------------
       */
 
-      await databases.createDocument(
+      const result = await tablesDB.createRow({
+        databaseId: DATABASE_ID,
+        tableId: EQUIPMENT_TABLE_ID,
+        rowId: Appwrite.ID.unique(),
+        data: equipmentData
+      });
 
-        DATABASE_ID,
+      console.log("EquipLink equipment row created:", result);
 
-        OWNER_COLLECTION_ID,
-
-        Appwrite.ID.unique(),
-
-        ownerData
-
+      showStatus(
+        "ownerStatus",
+        "Your equipment has been submitted successfully. EquipLink will review the listing before it is published.",
+        "success"
       );
 
+      document.getElementById("ownerForm").reset();
 
-      status.classList.add("success");
+    } catch (error) {
 
-      status.innerText =
-        "Your equipment has been submitted successfully. EquipLink will review the listing.";
+      console.error("EquipLink Appwrite error:", error);
 
-      document
-        .getElementById("ownerForm")
-        .reset();
-
-
-    } catch(error) {
-
-      console.error(error);
-
-      status.classList.add("error");
-
-      status.innerText =
-        "We could not submit your equipment yet. Please check your Appwrite connection.";
-
+      showStatus(
+        "ownerStatus",
+        "We could not submit the equipment yet. Please check the Appwrite table permissions and try again.",
+        "error"
+      );
     }
 
 });
@@ -761,98 +822,40 @@ document
 ==========================================================
 CUSTOMER REQUEST
 ==========================================================
+
+The customer-request table has not yet been created.
+We will activate this after creating its own Appwrite
+table. We deliberately do NOT write customer requests
+into the Equipment table because they are different types
+of data.
+==========================================================
 */
 
 document
   .getElementById("requestForm")
-  .addEventListener("submit", async function(event) {
+  .addEventListener("submit", function(event) {
 
     event.preventDefault();
 
-    const status =
-      document.getElementById("requestStatus");
-
-    status.style.display = "block";
-
-    status.className = "status";
-
-    status.innerText =
-      "Sending your request...";
-
-    try {
-
-      const requestData = {
-
-        customerName:
-          document.getElementById("customerName").value,
-
-        customerPhone:
-          document.getElementById("customerPhone").value,
-
-        customerEmail:
-          document.getElementById("customerEmail").value,
-
-        requestedEquipment:
-          document.getElementById("requestedEquipment").value,
-
-        location:
-          document.getElementById("customerLocation").value,
-
-        startDate:
-          document.getElementById("startDate").value,
-
-        endDate:
-          document.getElementById("endDate").value,
-
-        transactionType:
-          document.getElementById("transactionType").value,
-
-        message:
-          document.getElementById("customerMessage").value,
-
-        status:
-          "New Request"
-
-      };
-
-
-      await databases.createDocument(
-
-        DATABASE_ID,
-
-        REQUEST_COLLECTION_ID,
-
-        Appwrite.ID.unique(),
-
-        requestData
-
-      );
-
-
-      status.classList.add("success");
-
-      status.innerText =
-        "Your request has been received. EquipLink will contact you regarding the next steps.";
-
-      document
-        .getElementById("requestForm")
-        .reset();
-
-
-    } catch(error) {
-
-      console.error(error);
-
-      status.classList.add("error");
-
-      status.innerText =
-        "We could not send your request yet. Please check your Appwrite connection.";
-
-    }
+    showStatus(
+      "requestStatus",
+      "The equipment request system is being connected. Please check back shortly.",
+      "success"
+    );
 
 });
 
 
+/*
+==========================================================
+APPWRITE CONNECTION TEST
+==========================================================
+*/
+
+console.log("EquipLink Africa - Appwrite TablesDB connected.");
+console.log("Project:", APPWRITE_PROJECT_ID);
+console.log("Database:", DATABASE_ID);
+console.log("Equipment table:", EQUIPMENT_TABLE_ID);
 </script>
 
 </body>
